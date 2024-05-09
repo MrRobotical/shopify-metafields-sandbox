@@ -1,0 +1,35 @@
+{% if product.metafields.custom.example_metafield %}
+  <h2>Example MetaFields</h2>
+  <p>{{ product.metafields.custom.example_metafield }}</p>
+{% endif %}
+
+<h2>Related Product Metafield</h2>
+<p>{{ product.metafields.custom.related_product.value.title }}</p>
+
+<h2>File Download Metafield</h2>
+<p>{{ product.metafields.custom.file_download.value.url }}</p>
+<a href="{{ product.metafields.custom.file_download.value.url }}">Download Now</a>
+
+<h2>Image File Metafield</h2>
+{{ product.metafields.custom.image_metafields | image_url: width: 50 | image_tag }}
+
+<h2>Date Metafield</h2>
+<p>{{ product.metafields.custom.date_metafield.value | date: '%b %d, %y' }}</p>
+
+<h2>Weight Metafield</h2>
+<p>{{ product.metafields.custom.weight_metafield.value | date: '%b %d, %y' }}</p>
+
+<h2>JSON Metafield</h2>
+<p style="opacity:{{ product.metafields.custom.json_metafield.value.message_opacity }}">
+  {{ product.metafields.custom.json_metafield.value.message }}
+</p>
+
+
+
+<h2>Dynamic Metafields from Settings</h2>
+
+{% if product.metafields.custom[section.settings.metafield_key].type == 'rich_text_metafield' %}
+  {{ product.metafields.custom[section.settings.metafield_key] | metafield_tag }}
+{% else %}
+  <p>{{ product.metafields.custom[section.settings.metafield_key] }}</p>
+{% endif %}
